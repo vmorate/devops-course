@@ -1,0 +1,78 @@
+## YAML
+---
+classes:
+  - gvpcommon::account
+  - docker
+ntp::servers:
+ - 10.95.67.227
+# RHEL 7 repos
+gvpcommon::repos::gvprepos7:
+  rhel7-base:
+    descr: 'Red Hat Enterprise Linux 7 - Base'
+    baseurl: 'http://repos.hi.inet/redhat/rhel7_dsn-x86_64/RPMS.all/'
+    enabled: '1'
+    gpgcheck: '0'
+  rhel7-extras:
+    descr: 'Red Hat Enterprise Linux 7 - Extras'
+    baseurl: 'http://repos.hi.inet/redhat/rhel7_dsn-x86_64/RPMS.server-extras/'
+    enabled: '1'
+    gpgcheck: '0'
+  epel:
+    descr: 'Extra Packages for Enterprise Linux 7 - $basearch'
+    gpgcheck: 0
+    baseurl: 'http://repos.hi.inet/redhat/rhel7_dsn-x86_64/RPMS.epel/'
+    enabled: 1
+  puppetlabs-products:
+    descr: 'Puppet Labs Products - 7'
+    gpgcheck: 0
+    baseurl: 'http://artifactory.aislada.hi.inet/artifactory/yum-puppetlabs/7/products/$basearch'
+    enabled: 1
+  puppetlabs-deps:
+    descr: 'Puppet Labs Dependencies - 7'
+    gpgcheck: 0
+    baseurl: 'http://artifactory.aislada.hi.inet/artifactory/yum-puppetlabs/7/dependencies/$basearch'
+    enabled: 1
+  dockerrepo:
+    descr: 'Docker Repository'
+    gpgcheck: 1
+    baseurl: 'https://yum.dockerproject.org/repo/main/centos/7'
+    enabled: 1
+    gpgkey: 'https://yum.dockerproject.org/gpg'
+  zabbix:
+    descr: 'Zabbix Official Repository - $basearch'
+    gpgcheck: 0
+    baseurl: 'http://repo.zabbix.com/zabbix/3.0/rhel/7/$basearch/'
+    enabled: 1
+
+# Accounts and users for development nodes
+accounts::managehome: true
+accounts::start_uid: '10000'
+accounts::start_gid: '10000'
+# Users
+accounts::users:
+  sysadmin:
+    uid: 10002
+    gid: 10002
+    comment: 'sudoer for develop'
+# Groups
+accounts::groups:
+  sysadmin:
+    gid: 10002
+# Accounts
+accounts::accounts:
+  sysadmin:
+    password: '$1$aGQ/Qgmj$rTob150.Ns1h7jd9rWcBE.'
+    groups:
+      - wheel
+
+docker::use_upstream_package_source: false
+docker::package_name: 'docker-engine'
+#docker::extra_parameters: '--add-registry registry.access.redhat.com'
+docker::registry_auth::registries:
+  'dockerhub.hi.inet':
+    username: 'contint'
+    password: 'admintid33'
+    email: 'contint@tid.es'
+docker::version: 'latest'
+
+

@@ -1,0 +1,22 @@
+##########################################################################
+# This file is centrally managed, any manual changes will be OVERWRITTEN #
+##########################################################################
+
+:backends:
+  - yaml
+  - json
+:yaml:
+  :datadir:  /vagrant/hieradata/
+  # the nodes/development, etc stuff is required by M2M
+  # $tier is a custom fact. Used by GVP (Raul Macian)
+:hierarchy:
+  - nodes/%{::clientcert}
+  - nodes/development/%{::clientcert}
+  - nodes/preproduction/%{::clientcert}
+  - nodes/production/%{::clientcert}
+  - nodes/%{::environment}/%{::clientcert}
+  - nodes/%{::tier}/%{::clientcert}
+  - environments/%{::tier}
+  - environments/%{::environment}
+  - common
+  - default
