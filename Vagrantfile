@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
       centos7.ssh.insert_key = false # Just needed for some Windows
       centos7.vm.box = "puppetlabs/centos-7.2-64-puppet"
       #config.vm.network "forwarded_port", guest: 3000, host: 8010
-      #config.vm.network "forwarded_port", guest: 8080, host: 8080      
+      config.vm.network "forwarded_port", guest: 8080, host: 8080      
       #centos7.vm.box_url = "https://atlas.hashicorp.com/bento/boxes/centos-7.2/versions/2.3.1/providers/virtualbox.box"
       #centos7.vm.box_version = "1.0.0"
       centos7.vm.hostname = "centos72.vagrant" 
